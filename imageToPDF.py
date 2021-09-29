@@ -5,7 +5,7 @@ from PIL import Image
 import io
 
 #ファイル名と画像を受け取ってPDFとPDFファイル名を返す関数
-def image_to_pdf(name, images):
+def image_to_pdf(images, name):
     # 出力するPDFの名前を設定してpdf_FileNameに格納
     #nameが空の場合PDFの名前をimageToPdf.pdfにする
     if len(name) == 0:
@@ -85,7 +85,7 @@ async def on_message(message):
                     images.append((await attachment.read(), "JPEG"))
             
             #image_to_pdf関数を呼び出してpdfとファイル名を受け取る
-            PDF_file, PDF_filename = image_to_pdf(name, images)
+            PDF_file, PDF_filename = image_to_pdf(images, name)
             
             #PDFを送信
             await message.channel.send(file=discord.File(fp=PDF_file, filename=PDF_filename))
